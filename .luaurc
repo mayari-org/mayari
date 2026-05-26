@@ -4,7 +4,7 @@
         "warn"
     ], 
     "aliases": {
-        "adapters": "@src/adapters", 
+        "adapters": "./src/adapters", 
         "std": "~/.lute/typedefs/1.0.0/std", 
         "c": "/home/wiz/projects/nova-projects/nova_core/tests/web/", 
         "core": "@src/core", 
