@@ -1,5 +1,5 @@
-local fs = require("../libs/fs")
-local process = require("../libs/process")
+local fs = require("@adapters/fs")
+local process = require("@adapters/process")
 
 local function findMainDir()
     local basePath = process.cwd
@@ -8,7 +8,7 @@ local function findMainDir()
     local hasApp = fs.isDir(`{basePath}/app`)
 
     if hasSrc and hasApp then
-        warn("Found both src/ and app/ on your project directory. Nova will try reading the src/ only.")
+        print("Found both src/ and app/ on your project directory. Nova will try reading the src/ only.")
     end
 
     if hasSrc then

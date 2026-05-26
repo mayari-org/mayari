@@ -1,6 +1,6 @@
 local process = require("@lute/process")
-local serde = require("../src/libs/serde")
-local fs = require("../src/libs/fs")
+local serde = require("@adapters/serde")
+local fs = require("@adapters/fs")
 
 local luaurcPath = process.cwd() .. "/.luaurc"
 local luaurcjson = fs.readFile(luaurcPath)

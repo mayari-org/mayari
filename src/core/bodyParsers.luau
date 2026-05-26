@@ -1,4 +1,4 @@
-local serde = require("../libs/serde")
+local serde = require("@adapters/serde")
 
 type BodyParsers = { [string]: (raw: string) -> string | {any}}
 
@@ -15,7 +15,7 @@ BodyParsers["application/json"] = function(raw: string)
         return decode("json", raw)
     end)
     if not success then
-        warn("Failed to decode JSON body")
+        print("Failed to decode JSON body")
         return {""}
     end
     return result

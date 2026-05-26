@@ -1,4 +1,4 @@
-local fs = require("@src/libs/fs")
+local fs = require("@adapters/fs")
 local runner = require("@self/runner")
 
 local function findTestFiles(dir: string): { string }

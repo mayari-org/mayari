@@ -1,4 +1,4 @@
-local process = require("../src/libs/process")
+local process = require("@adapters/process")
 
 export type Expected = {
     toBe: (expected: any) -> (),

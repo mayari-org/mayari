@@ -1,13 +1,14 @@
-local net = require("./libs/net")
-local fs = require("./libs/fs")
-local serde = require("./libs/serde")
-local process = require("./libs/process")
+local net = require("@adapters/net")
+local fs = require("@adapters/fs")
+local serde = require("@adapters/serde")
+local process = require("@adapters/process")
 local types = require("./types")
 local routing = require("./core/routing")
 local loadEnv = require("./utils/loadEnv")
 local findMainDir = require("./utils/findMainDir")
 local generateRoute = require("./core/generateRoute")
 local generateAlias = require("./utils/generateAlias")
+local decoratorRegistry = require("./core/decoratorRegistry")
 
 export type Next = types.Next
 export type Nova = types.Nova
@@ -34,8 +35,12 @@ local function devMiddleware(req: types.Request, next: types.Next)
 
     local status = res.status or 200
     local color = "\27[31m"
-    if status >= 200 and status < 300 then color = "\27[32m"
-    elseif status >= 300 and status < 400 then color = "\27[34m" end
+    
+    if status >= 200 and status < 300 then 
+        color = "\27[32m"
+    elseif status >= 300 and status < 400 then 
+        color = "\27[34m" 
+    end
 
     if req.path ~= "/favicon.ico" then
         print(string.format("[%s] %s %s%d\27[0m", req.method, req.path, color, status))
@@ -83,6 +88,7 @@ function Nova:listen(handler: () -> ())
         }
     end
 
+    decoratorRegistry.loadAll(mainDir)
     generateRoute(mainDir, "")
 
     local allMiddlewares = self.middlewares and table.clone(self.middlewares) or {}

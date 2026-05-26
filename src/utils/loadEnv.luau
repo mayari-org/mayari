@@ -1,5 +1,5 @@
-local process = require("../libs/process")
-local fs = require("../libs/fs")
+local process = require("@adapters/process")
+local fs = require("@adapters/fs")
 
 local function loadEnv()
     local envVars: { [string]: string } = {}

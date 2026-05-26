@@ -1,0 +1,5 @@
+---
+base: luau
+globals:
+  zune:
+    any: true
