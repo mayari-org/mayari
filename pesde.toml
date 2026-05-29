@@ -1,7 +1,7 @@
-name = "bizwiz3/nova"
+name = "nova_guild/nova_core"
 version = "0.5.7"
 description = "A filesystem-based web framework for Luau runtimes, with out-of-the-box support for Lute, Lune and Zune."
-authors = ["BizWiz3 (https://github.com/BizWiz3)", "Leoj030 (https://github.com/Leoj030)"]
+authors = ["Nova Guild (https://github.com/nova-guild)"]
 license = "MIT"
 repository = "https://github.com/BizWiz3/nova"
 private = false
@@ -13,11 +13,8 @@ includes =[
 ]
 
 [target]
-environment = "lune"
+environment = "luau"
 lib = "src/index.luau"
 
 [indices]
 default = "https://github.com/pesde-pkg/index"
-
-[dependencies]
-

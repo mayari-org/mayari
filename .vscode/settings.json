@@ -1,8 +1,11 @@
 {
-  "luau-lsp.types.definitionFiles": [
-    "/home/wiz/.zune/typedefs/global/zune.d.luau"
-  ],
+  "luau-lsp.sourcemap.enabled": false,
+  "luau-lsp.fflags.enableNewSolver": true,
+  "luau-lsp.fflags.enableByDefault": true,
+  "luau-lsp.types.definitionFiles": {
+    "zune": "~/.zune/typedefs/global/zune.d.luau"
+  },
   "luau-lsp.types.documentationFiles": [
-    "/home/wiz/.zune/typedefs/global/zune.d.json"
+    "~/.zune/typedefs/global/zune.d.json"
   ]
 }

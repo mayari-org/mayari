@@ -4,7 +4,7 @@ local UserService = require("./users.service")
 local Users = {}
 
 function Users.Get()
-    return Nova.response.json(UserService.getUser(123))
+	return Nova.response.json(UserService.getUser(123))
 end
 
 return Users

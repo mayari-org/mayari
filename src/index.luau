@@ -1,36 +1,34 @@
-local net = require("@adapters/net")
-local fs = require("@adapters/fs")
-local serde = require("@adapters/serde")
-local process = require("@adapters/process")
-local types = require("./types")
-local routing = require("./core/routing")
-local loadEnv = require("./utils/loadEnv")
-local findMainDir = require("./utils/findMainDir")
-local generateRoute = require("./core/generateRoute")
-local generateAlias = require("./utils/generateAlias")
-local decoratorRegistry = require("./core/decoratorRegistry")
+local net = require("@adpt/net")
+local fs = require("@adpt/fs")
+local serde = require("@adpt/serde")
+local process = require("@adpt/process")
+local Types = require("./types")
+local routeDispatcher = require("@core/Routing/Dispatcher")
+local generateRoute = require("@core/Routing/Generator")
+local loadEnv = require("@utils/LoadEnv")
+local MainDir = require("@utils/MainDir")
+local generateAlias = require("@utils/GenerateAlias")
+local attrRegistryGenerator = require("@core/Attribute/RegistryGenerator")
 
-export type Next = types.Next
-export type Nova = types.Nova
-export type Request = types.Request
-export type RequestWith<T> = types.RequestWith<T>
-export type ResponseOptions = types.ResponseOptions
+export type Next = Types.Next
+export type Nova = Types.Nova
+export type Request = Types.Request
+export type RequestWith<T> = Types.RequestWith<T>
+export type ResponseOptions = Types.ResponseOptions
 
 local serve = net.serve
 local isFile = fs.isFile
 local readFile = fs.readFile
 local encode = serde.encode
---local env = process.env
 local cwd = process.cwd
-local routerDispatcher = routing.routerDispatcher
 
 local Nova = {}
 Nova.__index = Nova
 
-Nova.chain = require("./utils/chain")
-Nova.response = require("./utils/response")
+Nova.chain = require("@utils/Chain")
+Nova.response = require("@utils/Response")
 
-local function devMiddleware(req: types.Request, next: types.Next)
+local function devMiddleware(req: Types.Request, next: Types.Next)
     local res =  next()
 
     local status = res.status or 200
@@ -47,7 +45,7 @@ local function devMiddleware(req: types.Request, next: types.Next)
     end
 end
 
-function Nova.new(port: number, middlewares: { (req: types.Request, next: types.Next) -> () }?)
+function Nova.new(port: number, middlewares: { (req: Types.Request, next: Types.Next) -> () }?)
     local self = setmetatable({}, Nova)
     self.port = port
     self.middlewares = middlewares
@@ -62,7 +60,7 @@ end
 function Nova:listen(handler: () -> ())
     local start = os.clock()
 
-    local mainDirName = findMainDir()
+    local mainDirName = MainDir
     local mainDir = `@c/{mainDirName}`
 
     local faviconPath = `{cwd}/{mainDirName}/favicon.ico`
@@ -88,16 +86,16 @@ function Nova:listen(handler: () -> ())
         }
     end
 
-    decoratorRegistry.loadAll(mainDir)
+    attrRegistryGenerator.loadRegistry(mainDir)
     generateRoute(mainDir, "")
 
     local allMiddlewares = self.middlewares and table.clone(self.middlewares) or {}
 
     if isDev then
-        table.insert(allMiddlewares :: { types.Middleware }, 1, devMiddleware :: types.Middleware)
+        table.insert(allMiddlewares :: { Types.Middleware }, 1, devMiddleware :: Types.Middleware)
     end
 
-    local rootPipeline = Nova.chain(allMiddlewares :: { types.Middleware }, routerDispatcher)
+    local rootPipeline = Nova.chain(allMiddlewares :: { Types.Middleware }, routeDispatcher)
 
     serve(self.port, {
         address = "0.0.0.0",
@@ -116,7 +114,7 @@ function Nova:listen(handler: () -> ())
                 return FAVICON_CACHED_RESPONSE or FAVICON_EMPTY_RESPONSE :: net.NetResponse
             end
 
-            local success, result: types.ResponsePayload | any = pcall(rootPipeline, request)
+            local success, result: Types.ResponsePayload | any = pcall(rootPipeline, request)
 
             if not success then
                 if isDev then
