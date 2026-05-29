@@ -1,7 +1,7 @@
 local runner = require("../../tests/runner")
 local describe, test, expect = runner.describe, runner.test, runner.expect
 
-local createRouter = require("../../src/core/routing").createTestRouter
+local createRouter = require("@core/Routing/CreateTestRouter")
 
 local function Test()
     describe("static routes", function()

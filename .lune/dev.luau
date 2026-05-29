@@ -1,6 +1,6 @@
 local process = require("@lune/process")
-local serde = require("@adapters/serde")
-local fs = require("@adapters/fs")
+local serde = require("@adpt/serde")
+local fs = require("@adpt/fs")
 
 local luaurcPath = process.cwd .. ".luaurc"
 local luaurcjson = fs.readFile(luaurcPath)

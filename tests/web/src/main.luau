@@ -1,5 +1,5 @@
 local Nova = require("@nova")
-local process = require("@adapters/process")
+local process = require("@adpt/process")
 --local process = zune.process
 
 local PORT = tonumber(process.env.PORT) or 8080
