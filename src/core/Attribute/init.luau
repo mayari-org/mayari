@@ -7,4 +7,5 @@ type Attributes = {
 ]]
 return {
 	Guard = require("@self/Guard"),
+    Interceptor = require("@self/Interceptor")
 } :: Attributes

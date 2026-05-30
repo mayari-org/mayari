@@ -1,7 +1,7 @@
 local Nova = require("@nova")
 
 local function Auth(_req: Nova.Request)
-    print("Auth Check")
+    print("Admin Check")
 	return true
 end
 

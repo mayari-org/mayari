@@ -2,9 +2,10 @@ local Nova = require("@nova")
 
 local Home = {}
 
---@Guard(Auth)
+--@Guard(Auth, Admin)
+--@Interceptor(Transform)
 function Home.Get()
-	return Nova.response.json("Hello, World")
+	return Nova.response.send("Hello, World")
 end
 
 return Home

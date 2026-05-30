@@ -1,10 +1,10 @@
 {
     "aliases": {
+        "lune": "~/.lune/.typedefs/0.10.4/", 
         "std": "~/.lute/typedefs/1.0.0/std", 
         "c": "/home/wiz/projects/nova-projects/nova_core/tests/web/", 
         "lint": "~/.lute/typedefs/1.0.0/lint", 
         "nova": "../../src/index", 
-        "lune": "~/.lune/.typedefs/0.10.4/", 
         "pkg": "./lune_packages/", 
         "lute": "~/.lute/typedefs/1.0.0/lute"
     }

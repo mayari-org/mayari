@@ -2,12 +2,12 @@ local fs = require("@adpt/fs")
 local process = require("@adpt/process")
 
 local cwd = process.cwd
-local registry: { [string]: { [string]: (req: any) -> any } } = {}
+local registry: { [string]: { [string]: (req: any, ...any) -> any } } = {}
 
 local DECORATOR_DIRS = {
 	"guards",
 	-- "validators",
-	-- "interceptors"
+	"interceptors"
 }
 
 --[[
