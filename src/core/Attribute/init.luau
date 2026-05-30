@@ -1,5 +1,7 @@
+local Types = require("../types")
+
 type Attributes = {
-    [string]: ({any}) -> (any, any) -> any
+    [string]: ({any}) -> (Types.Request, Types.Next) -> Types.ResponsePayload?
 }
 
 --[[
@@ -7,5 +9,6 @@ type Attributes = {
 ]]
 return {
 	Guard = require("@self/Guard"),
-    Interceptor = require("@self/Interceptor")
+    Interceptor = require("@self/Interceptor"),
+    Validator = require("@self/Validator")
 } :: Attributes

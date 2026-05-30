@@ -32,7 +32,7 @@ end
 local function applyAttributes(routeModule: any, extractedDecorators: { [string]: { string } })
     for _, method in METHOD_NAMES do
         local handler = routeModule[method]
-        if type(handler) ~= "function" then
+        if typeof(handler) ~= "function" then
             continue
         end
 

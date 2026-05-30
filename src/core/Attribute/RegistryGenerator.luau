@@ -6,7 +6,7 @@ local registry: { [string]: { [string]: (req: any, ...any) -> any } } = {}
 
 local DECORATOR_DIRS = {
 	"guards",
-	-- "validators",
+	"validators",
 	"interceptors"
 }
 
@@ -35,7 +35,7 @@ local function loadRegistry(mainDir: string)
 				local modulePath = mainDir .. "/../" .. dirName .. "/" .. name
 				local ok, result = pcall(require, modulePath)
 
-				if ok and type(result) == "function" then
+				if ok and type(result) == "function" or type(result) == "table" then
 					registry[namespace][name] = result
 					print(`\27[32mLoaded {namespace}: {name}\27[0m`)
 				else

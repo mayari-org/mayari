@@ -1,6 +1,6 @@
 -- TODO: Enhance the types
 
-export type Next = () -> NextResponse
+export type Next = () -> ResponsePayload
 
 export type Nova = {
 	--[[
@@ -38,12 +38,6 @@ export type ResponsePayload = {
 	config: ResponseOptions,
 }
 
-export type NextResponse = {
-	status: number?,
-	body: any,
-	headers: { [string]: string }?,
-}
-
 export type Response = {
 	--[[
         Respond with a string
@@ -69,6 +63,28 @@ export type Response = {
         Respond with a js
     ]]
 	css: (body: string, config: ResponseOptions?) -> ResponsePayload,
+}
+
+-- Validators
+export type BodyField = {
+    type: string?,
+    required: boolean?,
+    min: number?,
+    max: number?,
+    pattern: string?,
+}
+
+export type StringField = {
+    required: boolean?,
+    minLength: number?,
+    maxLength: number?,
+    pattern: string?,
+}
+
+export type ValidatorSchema = {
+    body: { [string]: BodyField }?,
+    params: { [string]: StringField }?,
+    query: { [string]: StringField }?,
 }
 
 return {}
