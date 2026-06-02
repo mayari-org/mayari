@@ -28,11 +28,9 @@ Nova.__index = Nova
 
 Nova.chain = require("@utils/Chain")
 Nova.response = require("@utils/Response")
+Nova.exception = require("@utils/Exception")
 
-local function devMiddleware(req: Types.Request, next: Types.Next)
-    local res = next()
-    local status = res.config.status or 200
-
+local function statusLog(status: number, req)
     local statusColor = "\27[31m"
     if status >= 200 and status < 300 then
         statusColor = "\27[32m"
@@ -45,6 +43,13 @@ local function devMiddleware(req: Types.Request, next: Types.Next)
         local attrSuffix = attrs ~= "" and ("  " .. statusColor .. attrs .. "\27[0m") or ""
         print(string.format("[%s] %s %s%d\27[0m%s", req.method, req.path, statusColor, status, attrSuffix))
     end
+end
+
+local function devMiddleware(req: Types.Request, next: Types.Next)
+    local res = next()
+    local status = res.config.status or 200
+
+    statusLog(status, req)
 end
 
 function Nova.new(port: number, middlewares: { (req: Types.Request, next: Types.Next) -> () }?)
@@ -120,20 +125,30 @@ function Nova:listen(handler: () -> ())
                 return FAVICON_CACHED_RESPONSE or FAVICON_EMPTY_RESPONSE :: net.NetResponse
             end
 
-            local success, result: Types.ResponsePayload | any = pcall(rootPipeline, request)
-
+            local success, result: Types.ResponsePayload 
+            | { statusCode: number, message: string } | any = pcall(rootPipeline, request)
+            
             if not success then
-                if isDev then
+                statusLog(result.statusCode or 500, request)
+                if typeof(result) == "table" then
+                    return {
+                        status = result.statusCode,
+                        body = encode("json", { error = result.message }),
+                        headers = { ["Content-Type"] = "application/json" }
+                    }
+                else
                     local errorMessage = debug.traceback(tostring(result), 2)
-                    print("\27[31m[Error]: " .. errorMessage .. "\27[0m")
-                end
-                return INTERNAL_ERROR_RESPONSE :: net.NetResponse
-            end
+                    print("\27[31m[Error]: \n" .. errorMessage .. "\27[0m")
 
-            local status: number
+                    return INTERNAL_ERROR_RESPONSE :: net.NetResponse
+                end
+            end
+            
+            local status: number?
             local headers = nil
 
             if result.config then
+                
                 status = result.config.status
                 headers = result.config.headers
             end
