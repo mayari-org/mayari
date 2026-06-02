@@ -86,9 +86,9 @@ Nova ships with three built-in Attributes, each serving a distinct purpose:
 
 | Attribute | Purpose |
 |---|---|
-| [`--@Guard`](/middleware/guard) | Protect routes — authentication and authorization |
-| [`--@Interceptor`](/middleware/interceptor) | Wrap the handler — logging, response transformation |
-| [`--@Validator`](/middleware/validator) | Validate incoming data — body, params, and query |
+| [`--@Guard`](/docs/guides/middleware/guard) | Protect routes — authentication and authorization |
+| [`--@Interceptor`](/docs/guides/middleware/interceptor) | Wrap the handler — logging, response transformation |
+| [`--@Validator`](/docs/guides/middleware/validator) | Validate incoming data — body, params, and query |
 
 ### Execution Order
 
