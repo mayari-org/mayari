@@ -7,52 +7,45 @@ Common use cases include:
 - **Logging:** Tracking request times and paths.
 - **Authentication:** Checking if a user is logged in.
 - **Validation:** Ensuring the request body contains the correct data.
-- **Security:** Adding headers.
+- **Security:** Adding headers or blocking malicious IPs.
 
 ## The Middleware Function
 
 A middleware in Nova is a simple function that receives two arguments:
 
-- `req` — The Request object.
-- `next` — A function that, when called, passes control to the next middleware in the stack.
+- `req:` The Request object.
+- `next:` A function that, when called, passes control to the next middleware in the stack.
 
 ### The Onion Pattern
 
-Nova uses the **Onion Pattern**. This means that when you call `next()`, execution **dives** into the next middleware or the final handler. Once the handler finishes, execution "bubbles" back up, running the code after `next()`.
+Nova uses the **Onion Pattern**. This means that when you call `next()`, the code execution **dives** into the next middleware or the final handler. Once the handler finishes, the execution "bubbles" back up, running the code after `next()`.
 
 ```luau
 local function myMiddleware(req, next)
     print("1. This runs BEFORE the route handler")
-
-    next()
-
+    
+    next() -- Move to the next middleware or handler
+    
     print("2. This runs AFTER the route handler is finished")
 end
 ```
 
-**Example Flow:**
-
-If you have Global Middleware `A`, Attribute `B`, and Handler `C`:
-
-```bash
-A (before next) → B (before next) → C (Handler) → B (after next) → A (after next)
-```
-
 ## Global Middleware
 
-Global middleware runs on **every single request** made to your server. These are defined when you initialize your Nova application.
+Global middlewares are executed for **every single request** made to your server. These are defined when you initialize your Nova application.
 
-`Nova.new()` accepts an optional second argument: a table of middleware functions.
+The `Nova.new()` constructor accepts an optional second argument: a table of middleware functions.
 
 ```luau
 local Nova = require("path/to/nova")
 
 local app = Nova.new(8080, {
-    myMiddleware1 = function(req, next)
+    function(req, next)
         print(`[{req.method}] {req.path}`)
         next()
     end,
-    myMiddleware1 = function(req, next)
+    function(req, next)
+        -- Another global middleware
         next()
     end
 })
@@ -62,58 +55,57 @@ app:listen(function()
 end)
 ```
 
-Global middlewares execute in the order they are defined.
+## Route-Specific Middleware (`Nova.chain`)
 
-## Route-Specific Middleware (Attributes)
+Sometimes you only want middleware to run on specific routes (e.g., protecting a `/dashboard` route). For this, Nova provides the `Nova.chain` utility.
 
-For middleware that should only run on specific routes, Nova uses **Attributes** — a comment-based syntax inspired by how decorators work in other languages.
+`Nova.chain` takes two arguments:
 
-Attributes are defined directly above a route handler function using the `--@` prefix:
+- A table of middlewares.
+- The final route handler function.
+
+Usage in `route.luau`
 
 ```luau
+local Nova = require("path/to/nova")
+
 local Home = {}
 
---@Guard(Auth)
---@Interceptor(Transform)
-function Home.Get()
-    return Nova.response.send("Hello, World")
+-- A simple auth middleware
+local function checkAuth(req, next)
+    if req.headers["Authorization"] then
+        next()
+    else
+        -- If we don't call next(), the chain stops here
+        return Nova.response.json({ error = "Unauthorized" }, { status = 401 })
+    end
 end
+
+-- Using Nova.chain to protect this specific GET route
+Home.Get = Nova.chain({ checkAuth }, function(req)
+    return Nova.response.json({ 
+        message = "Welcome to the protected dashboard!" 
+    })
+end)
 
 return Home
 ```
 
-Nova ships with three built-in Attributes, each serving a distinct purpose:
+## Execution Order
 
-| Attribute | Purpose |
-|---|---|
-| [`--@Guard`](/middleware/guard) | Protect routes — authentication and authorization |
-| [`--@Interceptor`](/middleware/interceptor) | Wrap the handler — logging, response transformation |
-| [`--@Validator`](/middleware/validator) | Validate incoming data — body, params, and query |
+It is important to understand the order in which Nova executes your code:
 
-### Execution Order
+- **Global Middlewares:** Executed in the order they were defined in `Nova.new`.
+- **Route Middlewares:** Executed in the order they appear in the `Nova.chain` table.
+- **Route Handler:** The actual logic inside your `Home.Get` or similar function.
+- **The "Bubble Up":** The code after `next()` in all middlewares runs in reverse order.
 
-Attributes always execute in this order, regardless of how they are defined:
+**Example Flow:**
 
-```bash
-Guard → Validator → Interceptor → Route Handler
-```
-
-Nova enforces this order at startup. If your Attributes are defined out of order, Nova will throw an error with a clear message telling you what to fix.
-
-### Convention-Driven Resolution
-
-Each Attribute references a **Rule** by name. Nova resolves Rules by convention from your `src/` directory:
-
-| Attribute | Rule Directory |
-|---|---|
-| `--@Guard(...)` | `src/guards/` |
-| `--@Interceptor(...)` | `src/interceptors/` |
-| `--@Validator(...)` | `src/validators/` |
-
-See the dedicated pages for each Attribute to learn how to define Rules.
+If you have Global Middleware `A`, Route Middleware `B`, and Handler` C`:
+`A (before next)` → `B (before next)` → `C (Handler)` → `B (after next)` → `A (after next)`
 
 ## Important Notes
 
-- **Always call `next()`** in global middleware. If you do not, the request will never reach the handler unless you are intentionally returning an early response.
-- **Global middleware runs first**, before any Attributes on the route.
-- **Attributes are route-specific** — they have no effect on routes that do not declare them.
+- **Always call `next()`:** If you do not call `next()`, the request will "hang" and never reach the handler (unless you intentionally return a response early to stop the request).
+- **Order Matters:** If Middleware A depends on data added to the request by Middleware B, Middleware B must come first in the table.
