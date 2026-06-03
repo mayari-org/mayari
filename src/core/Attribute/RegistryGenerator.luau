@@ -1,5 +1,5 @@
-local fs = require("@adpt/fs")
-local process = require("@adpt/process")
+local fs = require("../../adapter/fs")
+local process = require("../../adapter/process")
 
 local cwd = process.cwd
 local registry: { [string]: { [string]: (req: any, ...any) -> any } } = {}

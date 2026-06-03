@@ -1,4 +1,4 @@
-local serde = require("@adpt/serde")
+local serde = require("../adapter/serde")
 
 type BodyParsers = { [string]: (raw: string) -> string | { any } }
 

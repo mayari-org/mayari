@@ -1,8 +1,7 @@
-local Nova = require("@nova")
+local Types = require("@nova-types")
 
-local function Transform(_req: Nova.Request, next: Nova.Next)
+local function Transform(_req: Types.Request, next: Types.Next)
     next()
-    return Nova.response.send("Hello, Interceptor")
 end
 
 return Transform

@@ -1,13 +1,14 @@
 {
     "languageMode": "strict", 
     "aliases": {
-        "std": "~/.lute/typedefs/1.0.0/std", 
+        "utils": "./src/utils", 
         "adpt": "./src/adapter/", 
-        "core": "./src/core", 
+        "nova-types": "./src/types",  
+        "std": "~/.lute/typedefs/1.0.0/std", 
         "lune": "~/.lune/.typedefs/0.10.4/", 
         "test-runner": "./tests/runner", 
+        "core": "./src/core", 
         "c": "/home/wiz/projects/nova-projects/nova_core/tests/web/", 
-        "utils": "./src/utils", 
         "lint": "~/.lute/typedefs/1.0.0/lint", 
         "lute": "~/.lute/typedefs/1.0.0/lute"
     }

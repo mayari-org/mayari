@@ -1,5 +1,5 @@
 local registry = require("./RegistryGenerator").registry
-local Response = require("@utils/Response")
+local Response = require("../../utils/Response")
 local Types = require("../../types")
 
 local function validateBody(schema: { [string]: Types.BodyField }, data: { [string]: any }): { string }

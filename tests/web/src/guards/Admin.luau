@@ -1,6 +1,6 @@
-local Nova = require("@nova")
+local Types = require("@nova-types")
 
-local function Auth(_req: Nova.Request)
+local function Auth(_req: Types.Request)
     print("Admin Check")
 	return true
 end

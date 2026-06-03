@@ -1,4 +1,4 @@
-local runner = require("../../tests/runner")
+local runner = require("@test-runner")
 local describe, test, expect = runner.describe, runner.test, runner.expect
 
 local createRouter = require("@core/Routing/CreateTestRouter")

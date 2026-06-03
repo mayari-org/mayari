@@ -1,11 +1,11 @@
-local fs = require("@adpt/fs")
-local process = require("@adpt/process")
+local fs = require("../../adapter/fs")
+local process = require("../../adapter/process")
 local registerRoute = require("./RegisterRoute")
 local AttributeResolver = require("../Attribute/Resolver")
 local Attributes = require("../Attribute")
 local Chain = require("../../utils/Chain")
 local RouteHelper = require("./Helpers")
-local RouteLogger = require("@utils/Logger")
+local RouteLogger = require("../../utils/Logger")
 
 local METHOD_NAMES = RouteHelper.METHOD_MAP
 local readDir = fs.readDir

@@ -1,5 +1,5 @@
 local Types = require("../types")
-local serde = require("@adpt/serde")
+local serde = require("../adapter/serde")
 
 local Response = {} :: Types.Response
 

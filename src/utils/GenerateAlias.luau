@@ -1,6 +1,6 @@
-local serde = require("@adpt/serde")
-local fs = require("@adpt/fs")
-local process = require("@adpt/process")
+local serde = require("../adapter/serde")
+local fs = require("../adapter/fs")
+local process = require("../adapter/process")
 
 local function generateAlias()
 	local luauarcPath = process.cwd .. "/.luaurc"
