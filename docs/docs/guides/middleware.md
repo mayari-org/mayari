@@ -1,6 +1,6 @@
 # Middleware
 
-Middleware is one of the fundamental features of Nova. It allows you to intercept, inspect, or modify requests before they reach your route handlers, and perform actions after the handler has finished.
+Middleware is one of the fundamental features of Mayari. It allows you to intercept, inspect, or modify requests before they reach your route handlers, and perform actions after the handler has finished.
 
 Common use cases include:
 
@@ -11,14 +11,14 @@ Common use cases include:
 
 ## The Middleware Function
 
-A middleware in Nova is a simple function that receives two arguments:
+A middleware in Mayari is a simple function that receives two arguments:
 
 - `req` — The Request object.
 - `next` — A function that, when called, passes control to the next middleware in the stack.
 
 ### The Onion Pattern
 
-Nova uses the **Onion Pattern**. This means that when you call `next()`, execution **dives** into the next middleware or the final handler. Once the handler finishes, execution "bubbles" back up, running the code after `next()`.
+Mayari uses the **Onion Pattern**. This means that when you call `next()`, execution **dives** into the next middleware or the final handler. Once the handler finishes, execution "bubbles" back up, running the code after `next()`.
 
 ```luau
 local function myMiddleware(req, next)
@@ -40,7 +40,7 @@ A (before next) → B (before next) → C (Handler) → B (after next) → A (af
 
 ## Global Middleware
 
-Global middleware runs on **every single request** made to your server. These are defined when you initialize your Nova application.
+Global middleware runs on **every single request** made to your server. These are defined when you initialize your Mayari application.
 
 `Nova.new()` accepts an optional second argument: a table of middleware functions.
 
@@ -66,7 +66,7 @@ Global middlewares execute in the order they are defined.
 
 ## Route-Specific Middleware (Attributes)
 
-For middleware that should only run on specific routes, Nova uses **Attributes** — a comment-based syntax inspired by how decorators work in other languages.
+For middleware that should only run on specific routes, Mayari uses **Attributes** — a comment-based syntax inspired by how decorators work in other languages.
 
 Attributes are defined directly above a route handler function using the `--@` prefix:
 
@@ -82,7 +82,7 @@ end
 return Home
 ```
 
-Nova ships with three built-in Attributes, each serving a distinct purpose:
+Mayari ships with three built-in Attributes, each serving a distinct purpose:
 
 | Attribute | Purpose |
 |---|---|
@@ -98,11 +98,11 @@ Attributes always execute in this order, regardless of how they are defined:
 Guard → Validator → Interceptor → Route Handler
 ```
 
-Nova enforces this order at startup. If your Attributes are defined out of order, Nova will throw an error with a clear message telling you what to fix.
+Mayari enforces this order at startup. If your Attributes are defined out of order, Mayari will throw an error with a clear message telling you what to fix.
 
 ### Convention-Driven Resolution
 
-Each Attribute references a **Rule** by name. Nova resolves Rules by convention from your `src/` directory:
+Each Attribute references a **Rule** by name. Mayari resolves Rules by convention from your `src/` directory:
 
 | Attribute | Rule Directory |
 |---|---|

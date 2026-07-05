@@ -3,16 +3,16 @@
 layout: home
 
 hero:
-  name: "Nova"
+  name: "Mayari"
   text: "Web Framework"
-  tagline: A filesystem-based web framework for Luau runtimes, with out-of-the-box support for Lute, Lune and Zune.
+  tagline: A convention-driven, runtime-agnostic web framework for Luau.
   image:
-    src: /nova.png
-    alt: Nova Logo
+    src: /mayari.png
+    alt: Mayari
   actions:
     - theme: brand
       text: Get Started
-      link: /docs/introduction/what-is-nova
+      link: /docs/introduction/what-is-mayari
     - theme: alt
       text: Luau Guides
       link: /luau-guides/introduction
@@ -23,6 +23,6 @@ features:
   - title: Filesystem Routing
     details: No manual route registration. Your folders are your paths
   - title: Runtime Agnostic
-    details: Whether you prefer Lune, Zune, or Lute, Nova is built to work across the different Luau runtimes seamlessly
+    details: Whether you prefer Lune, Zune, or Lute, Mayari is built to work across the different Luau runtimes seamlessly
 ---
 

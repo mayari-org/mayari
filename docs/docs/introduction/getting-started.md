@@ -1,6 +1,6 @@
 # Getting Started
 
-The fastest way to get a Nova project running is by using our scaffolding tool, but you can also set things up manually if you prefer.
+The fastest way to get a Mayari project running is by using our scaffolding tool, but you can also set things up manually if you prefer.
 
 ## Prerequisites
 
@@ -51,9 +51,9 @@ zune run start
 
 If you prefer doing things yourself, follow these steps.
 
-**1. Install Nova**
+**1. Install Mayari**
 
-Add Nova to your project using `pesde`:
+Add Mayari to your project using `pesde`:
 
 ```bash
 pesde add bizwiz3/nova
@@ -62,7 +62,7 @@ pesde install
 
 **2. Create the Entry Point**
 
-Create a file named `index.luau` (or any name you like) in your root directory. This file initializes Nova and starts the server.
+Create a file named `index.luau` (or any name you like) in your root directory. This file initializes Mayari and starts the server.
 
 ```luau
 local Nova = require("path/to/nova")
@@ -76,7 +76,7 @@ end)
 
 **3. Create your first route**
 
-Nova uses **Filesystem Routing**. This means the files in your `app` folder determine your URL paths. Create a folder named `app`, and inside it, create a file named `route.luau`.
+Mayari uses **Filesystem Routing**. This means the files in your `app` folder determine your URL paths. Create a folder named `app`, and inside it, create a file named `route.luau`.
 
 You can structure your project like this:
 

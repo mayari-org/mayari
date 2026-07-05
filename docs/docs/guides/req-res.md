@@ -1,6 +1,6 @@
 # Request & Response
 
-Every route handler in Nova receives a `Request` object. Your job is to process that request and return a `Response` using Nova's built-in utilities.
+Every route handler in Mayari receives a `Request` object. Your job is to process that request and return a `Response` using Mayari's built-in utilities.
 
 ## The Request Object
 
@@ -8,7 +8,7 @@ Even if you don't explicitly use it, every handler is passed a request object.
 
 ### A Note on Naming
 
-In our examples, we use the name `req`. However, you can name this parameter anything you like. Because of how Luau works, Nova will always pass the Request object as the first argument, regardless of what you call it.
+In our examples, we use the name `req`. However, you can name this parameter anything you like. Because of how Luau works, Mayari will always pass the Request object as the first argument, regardless of what you call it.
 
 ```luau
 -- This works perfectly fine!
@@ -31,7 +31,7 @@ A standard `Nova.Request` contains:
 
 ## Using Types
 
-Nova provides two main types for requests. You can access these by requiring Nova in your route file.
+Mayari provides two main types for requests. You can access these by requiring Mayari in your route file.
 
 ### 1. `Nova.Request`
 
@@ -48,7 +48,7 @@ end
 Use this when you want to add type-checking and autocomplete for `req.params` or `req.query`.
 
 ::: info IMPORTANT 
-Types are for your editor's benefit. Nova does not automatically convert types (e.g., a string `"123"` won't automatically become a number `123`), so you'll still need to parse them manually.
+Types are for your editor's benefit. Mayari does not automatically convert types (e.g., a string `"123"` won't automatically become a number `123`), so you'll still need to parse them manually.
 :::
 
 ```luau
@@ -60,7 +60,7 @@ end
 
 ## The Response Utility
 
-Nova provides a `response` utility to handle the **boring stuff** like setting `Content-Type` headers and status codes.
+Mayari provides a `response` utility to handle the **boring stuff** like setting `Content-Type` headers and status codes.
 
 ### Response Types
 

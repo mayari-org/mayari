@@ -1,6 +1,6 @@
 <div align="center">
     <h1>
-        <img height="150" src="./docs/public/nova.png" alt="Nova logo">
+        <img height="150" src="./docs/public/mayari.png" alt="Mayari">
     </h1>
     <h3>
         A convention-driven, runtime-agnostic web framework for Luau.

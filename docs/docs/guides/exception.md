@@ -1,10 +1,10 @@
 # Exception
 
-Nova provides a built-in `Exception` module for throwing structured HTTP errors from anywhere in your application — route handlers, Guard rules, Interceptors, or Validators. Exceptions are caught by Nova's global error handler and converted into a proper HTTP response automatically.
+Mayari provides a built-in `Exception` module for throwing structured HTTP errors from anywhere in your application — route handlers, Guard rules, Interceptors, or Validators. Exceptions are caught by Mayari's global error handler and converted into a proper HTTP response automatically.
 
 ## Usage
 
-Luau does not have a `throw` keyword, but `error()` behaves similarly — it halts execution immediately and can be caught by `pcall`. Nova's global error handler uses `pcall` under the hood, so it detects when an Exception is thrown and responds with the appropriate status code and message.
+Luau does not have a `throw` keyword, but `error()` behaves similarly — it halts execution immediately and can be caught by `pcall`. Mayari's global error handler uses `pcall` under the hood, so it detects when an Exception is thrown and responds with the appropriate status code and message.
 
 ```luau
 local Nova = require("@nova")
@@ -65,5 +65,5 @@ The first argument is the status code and the second is the message. Both are re
 ## Important Notes
 
 - `error()` halts execution immediately. Nothing after it runs.
-- Exceptions are only meaningful when thrown inside Nova's request pipeline. Throwing one outside of a request context will not produce an HTTP response.
+- Exceptions are only meaningful when thrown inside Mayari's request pipeline. Throwing one outside of a request context will not produce an HTTP response.
 - All built-in Exceptions accept an optional custom message. `HttpException` requires one.
