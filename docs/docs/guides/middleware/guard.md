@@ -1,6 +1,6 @@
 # Guard
 
-A Guard protects a route by running an authorization check before the handler is reached. If the check passes, the request proceeds. If it fails, Nova halts the pipeline and responds immediately.
+A Guard protects a route by running an authorization check before the handler is reached. If the check passes, the request proceeds. If it fails, Mayari halts the pipeline and responds immediately.
 
 Guards are the first Attribute to execute in the pipeline:
 
@@ -49,7 +49,7 @@ end
 return Auth
 ```
 
-If the rule returns `false`, Nova responds with `401 Unauthorized` and the pipeline stops. If it returns `true`, the request moves to the next step.
+If the rule returns `false`, Mayari responds with `401 Unauthorized` and the pipeline stops. If it returns `true`, the request moves to the next step.
 
 ## Throwing Exceptions
 
@@ -66,7 +66,7 @@ end
 return Auth
 ```
 
-`error()` halts execution immediately and Nova's global error handler catches it, responding with the appropriate status code and message.
+`error()` halts execution immediately and Mayari's global error handler catches it, responding with the appropriate status code and message.
 
 You can also pass a custom message:
 

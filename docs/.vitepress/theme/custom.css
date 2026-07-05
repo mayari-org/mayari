@@ -1,31 +1,61 @@
 :root {
-  --vp-c-brand-1: #7c3aed;
-  --vp-c-brand-2: #8b5cf6;
-  --vp-c-brand-3: #a78bfa;
-  --vp-c-brand-soft: rgba(124, 58, 237, 0.1);
+  --vp-c-brand-1: #222222;      
+  --vp-c-brand-2: #000000;      
+  --vp-c-brand-3: #444444;      
+  --vp-c-brand-soft: rgba(0, 0, 0, 0.06);
 
-  --vp-c-bg: #faf9fe;
-  --vp-c-bg-alt: #f3f0ff;
-  --vp-c-bg-soft: #ebe4ff;
+  --vp-c-gray-1: #111111;
+  --vp-c-gray-2: #3a3a3a;
+  --vp-c-gray-3: #626262;
+  --vp-c-gray-soft: #dfdfdf;
+
+  --vp-c-bg: #FEFEFE;           
+  --vp-c-bg-alt: #dfdfdf;       
+  --vp-c-bg-elv: #ffffff;       
+  --vp-c-bg-soft: #f4f4f4;      
   
-  --vp-c-text-1: #1e1b4b;
-  --vp-c-text-2: #4c4a82;
+  --vp-c-text-1: #111111;       
+  --vp-c-text-2: #3a3a3a;       
+  --vp-c-text-3: #626262;       
+
+  --vp-c-divider: #d2d2d2;      
+  --vp-c-gutter: #d2d2d2;
+
+  --vp-code-block-bg: #f4f4f4;
+  --vp-custom-block-info-bg: #dfdfdf;
+  --vp-home-hero-name-color: #959595;
 }
 
 .dark {
-  --vp-c-brand-1: #a78bfa; 
-  --vp-c-brand-2: #c4b5fd;
-  --vp-c-brand-3: #8b5cf6;
-  --vp-c-brand-soft: rgba(167, 139, 250, 0.14);
+  --vp-c-brand-1: #eaeaea;      
+  --vp-c-brand-2: #ffffff;      
+  --vp-c-brand-3: #a3a3a3;      
+  --vp-c-brand-soft: rgba(234, 234, 234, 0.12);
 
-  --vp-c-bg: #121118;      
-  --vp-c-bg-alt: #181622;  
-  --vp-c-bg-elv: #1f1d2c;  
-  --vp-c-bg-soft: #262438; 
+  --vp-c-gray-1: #f5f5f5;
+  --vp-c-gray-2: #ababab;
+  --vp-c-gray-3: #737373;
+  --vp-c-gray-soft: #1c1c1c;
 
-  --vp-c-text-1: #e2e0f7;  
-  --vp-c-text-2: #a3a1c3;  
+  --vp-c-bg: #0d0d0d;           
+  --vp-c-bg-alt: #141414;       
+  --vp-c-bg-elv: #1a1a1a;       
+  --vp-c-bg-soft: #141414;      
+
+  --vp-c-text-1: #f5f5f5;       
+  --vp-c-text-2: #ababab;       
+  --vp-c-text-3: #737373;       
   
-  --vp-c-divider: #2d2b3f;
-  --vp-c-gutter: #2d2b3f;
+  --vp-c-divider: #222222;
+  --vp-c-gutter: #222222;
+
+  --vp-code-block-bg: #141414;
+  --vp-custom-block-info-bg: #1a1a1a;
+  --vp-home-hero-name-color: #959595;
+}
+
+.VPHero .image-container .image-src {
+  max-height: 250px;
+  width: auto;
+  margin: 0 auto;
 }

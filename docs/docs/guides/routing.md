@@ -1,14 +1,14 @@
 # Routing
 
-Routing is the core of any Nova application. Nova uses a **Filesystem-based Router**, meaning the structure of your directories defines the paths of your API.
+Routing is the core of any Mayari application. Mayari uses a **Filesystem-based Router**, meaning the structure of your directories defines the paths of your API.
 
 ## The `route.luau` File
 
-In Nova, every route is defined by a file named `route.luau`. For a directory to be recognized as a valid endpoint, it must contain this file.
+In Mayari, every route is defined by a file named `route.luau`. For a directory to be recognized as a valid endpoint, it must contain this file.
 
 ## File Structure
 
-Nova follows the Luau **Module** pattern. Your `route.luau` must return a table containing your request handlers.
+Mayari follows the Luau **Module** pattern. Your `route.luau` must return a table containing your request handlers.
 
 ```luau
 local Home = {}
@@ -53,7 +53,7 @@ Static routes are fixed paths. The folder name in your `app` directory matches t
 
 ## Dynamic Routes
 
-Sometimes you don't know the exact segment name ahead of time (like a User ID). Nova supports two types of dynamic routes using special folder naming conventions.
+Sometimes you don't know the exact segment name ahead of time (like a User ID). Mayari supports two types of dynamic routes using special folder naming conventions.
 
 ### Route Parameters `[param]`
 

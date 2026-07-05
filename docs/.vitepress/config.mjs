@@ -2,10 +2,10 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Nova",
+  title: "Mayari",
   description: "A filesystem-based web framework for Luau runtimes, with out-of-the-box support for Lute, Lune and Zune.",
-  head: [['link', { rel: 'icon', href: '/nova/favicon.ico' }]],
-  base: "/nova/",
+  head: [['link', { rel: 'icon', href: '/mayari/favicon.ico' }]],
+  base: "/mayari/",
   themeConfig: {
     search: {
       provider: 'local'
@@ -21,7 +21,7 @@ export default defineConfig({
         {
           text: 'Introduction',
           items: [
-            { text: 'What is Nova?', link: '/docs/introduction/what-is-nova' },
+            { text: 'What is Mayari?', link: '/docs/introduction/what-is-mayari' },
             { text: 'Getting Started', link: '/docs/introduction/getting-started' }
           ]
         },
@@ -70,10 +70,10 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/nova-guild/nova' }
+      { icon: 'github', link: 'https://github.com/mayari-org/mayari' }
     ],
     editLink: {
-        pattern: 'https://github.com/nova-guild/nova/edit/main/docs/:path',
+        pattern: 'https://github.com/mayari-org/mayari/edit/main/docs/:path',
         text: 'Edit this page on GitHub'
     }
   }

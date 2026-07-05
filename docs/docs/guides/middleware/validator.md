@@ -1,6 +1,6 @@
 # Validator
 
-A Validator checks the incoming request data before it reaches the route handler. If any field fails validation, Nova responds immediately with a list of all errors. If everything passes, the request proceeds.
+A Validator checks the incoming request data before it reaches the route handler. If any field fails validation, Mayari responds immediately with a list of all errors. If everything passes, the request proceeds.
 
 Validators run after Guards and before Interceptors:
 
@@ -63,7 +63,7 @@ A Validator Rule can validate three parts of the request:
 
 ## Error Response
 
-Nova validates **all fields** before responding. If multiple fields fail, the response includes every error at once rather than stopping at the first:
+Mayari validates **all fields** before responding. If multiple fields fail, the response includes every error at once rather than stopping at the first:
 
 ```json
 {
