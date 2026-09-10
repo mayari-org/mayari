@@ -52,7 +52,6 @@ function Mayari.new(port: number, middlewares: { any }?)
     self.dev = table.find(process.args, "dev") ~= nil
 
     loadEnv()
-    alias.set("c", cwd, `{cwd}/packages/luau/.lpm/mayari_core/.luaurc`)
     alias.set("c", cwd)
 
     return self :: IMayari

@@ -1,6 +1,6 @@
 [package]
 name = "mayari/core"
-version = "0.7.5"
+version = "0.7.7"
 description = "An Adaptive Luau Web Backend Framework."
 authors = ["mayari-org"]
 repository = "https://github.com/mayari-org/mayari"
@@ -8,7 +8,7 @@ license = "MIT"
 
 [target]
 environment = "luau"
-main = "src/index.luau"
+main = ".mayari/src/index.luau"
 includes = ["README.md", "LICENSE", ".mayari/src", "lpm.toml"]
 
 [scripts]
