@@ -57,7 +57,7 @@ jobs:
           nodetail: true
           color: 0xEBE9EB
           username: Mayari Release
-          avatar_url: https://raw.githubusercontent.com/mayari-org/mayari/main/docs/public/mayari.png
+          avatar_url: https://raw.githubusercontent.com/mayari-org/docs/main/public/mayari.png
 
   publish-pkg:
     name: Publish Package

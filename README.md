@@ -1,6 +1,6 @@
 <div align="center">
     <h1>
-        <img height="150" src="./docs/public/mayari.png" alt="Mayari">
+        <img height="150" src="https://raw.githubusercontent.com/mayari-org/docs/main/public/mayari.png" alt="Mayari">
     </h1>
     <h3>
         An Adaptive Luau Web Backend Framework.
