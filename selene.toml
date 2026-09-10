@@ -1,2 +1,1 @@
-std = "luau"
-exclude = ["luau_packages/**", "lune_packages/**"]
+std = "globals"
