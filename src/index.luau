@@ -6,24 +6,7 @@ local alias = require("./utils/Alias")
 local attrRegistryGenerator = require("./core/Attribute/RegistryGenerator")
 local RouteLogger = require("./utils/Logger")
 local Chain = require("./utils/Chain")
-local common = require("@mayari.common")
-local adpt = require("@mayari.adpt")
-
-export type Next = common.Next
-export type Mayari = common.Mayari
-export type Middleware = common.Middleware
-export type Middleware2 = (req: Request | RequestWith<any>, next: Next) -> ResponsePayload?
-export type Handler = common.Handler
-export type Request = common.Request
-export type RequestWith<T> = common.RequestWith<T>
-export type ResponseOptions = common.ResponseOptions
-export type ResponsePayload = common.ResponsePayload
-export type Response = common.Response
-
--- Validator Schema
-export type BodyField = common.BodyField
-export type StringField = common.StringField
-export type ValidatorSchema = common.ValidatorSchema
+local adpt = require("adpt")
 
 local net = adpt.net
 local fs = adpt.fs
@@ -55,7 +38,7 @@ local function statusLog(status: number, req)
     end
 end
 
-local function devMiddleware(req: common.Request, next: common.Next)
+local function devMiddleware(req: IRequest, next: INext)
     local res = next()
     local status = res.config.status or 200
 
@@ -72,7 +55,7 @@ function Mayari.new(port: number, middlewares: { any }?)
     alias.set("c", cwd, `{cwd}/packages/luau/.lpm/mayari_core/.luaurc`)
     alias.set("c", cwd)
 
-    return self :: Mayari
+    return self :: IMayari
 end
 
 function Mayari.listen(self: MayariPrivate, handler: () -> ())
@@ -107,10 +90,10 @@ function Mayari.listen(self: MayariPrivate, handler: () -> ())
     local allMiddlewares = self.middlewares and table.clone(self.middlewares) or {}
 
     if isDev then
-        table.insert(allMiddlewares :: { common.Middleware }, 1, devMiddleware :: common.Middleware)
+        table.insert(allMiddlewares :: { IMiddleware }, 1, devMiddleware :: IMiddleware)
     end
 
-    local rootPipeline = Chain(allMiddlewares :: { common.Middleware }, routeDispatcher)
+    local rootPipeline = Chain(allMiddlewares :: { IMiddleware }, routeDispatcher)
 
     serve(self.port, {
         address = "0.0.0.0",
@@ -129,7 +112,7 @@ function Mayari.listen(self: MayariPrivate, handler: () -> ())
                 return FAVICON_CACHED_RESPONSE or { status = 204 }
             end
 
-            local success, result: common.ResponsePayload | { statusCode: number, message: string } | any =
+            local success, result: IResponsePayload | { statusCode: number, message: string } | any =
                 pcall(rootPipeline, request)
 
             if not success then

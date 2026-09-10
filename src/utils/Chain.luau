@@ -1,6 +1,4 @@
-local common = require("@mayari.common")
-
-local function chain(middlewares: { common.Middleware }, finalHandler: common.Handler)
+local function chain(middlewares: { IMiddleware }, finalHandler: IHandler)
     local queue = middlewares or {}
 
     local currentPipeline = function(req: any)
@@ -32,7 +30,7 @@ local function chain(middlewares: { common.Middleware }, finalHandler: common.Ha
                 return nextResponse
             end
 
-            local result = (middleware :: common.Middleware)(req, nextFn)
+            local result = (middleware :: IMiddleware)(req, nextFn)
 
             if not not result then
                 return result

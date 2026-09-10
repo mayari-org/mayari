@@ -3,8 +3,8 @@
     "aliases": {
         "std": "~/.lute/typedefs/1.0.0/std",
         "c": "/path/to/placeholder",
-        "mayari.common": "./packages/luau/common", 
-        "mayari.adpt": "./packages/luau/adpt", 
+        "common": "./packages/luau/common", 
+        "adpt": "./packages/luau/adpt", 
         "core": "./src/core", 
         "lune": "~/.lune/.typedefs/0.10.4/", 
         "lint": "~/.lute/typedefs/1.0.0/lint", 

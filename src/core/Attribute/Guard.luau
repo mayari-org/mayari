@@ -1,13 +1,14 @@
 local registry = require("./RegistryGenerator").registry
-local common = require("@mayari.common")
+local common = require("common")
+
 local Exception = common.exception
 
 local function Guard(args: { string })
-    return function(req: common.Request, next: common.Next)
+    return function(req: IRequest, next: INext)
         local attribute = registry["Guard"]
 
         if not attribute then
-            return next()
+            next()
         end
 
         for _, arg in args do
@@ -24,7 +25,7 @@ local function Guard(args: { string })
             end
         end
 
-        return next()
+        next()
     end
 end
 

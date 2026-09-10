@@ -3,6 +3,9 @@
 .env.local
 .env.development
 
+# mayari
+.mayari/
+
 # packages
 lune_packages/
 luau_packages/

@@ -3,3 +3,5 @@ base: luau
 globals:
   zune:
     any: true
+  lsp:
+    any: true

@@ -1,4 +1,4 @@
-local adpt = require("@mayari.adpt")
+local adpt = require("adpt")
 local registerRoute = require("./RegisterRoute")
 local AttributeResolver = require("../Attribute/Resolver")
 local Attributes = require("../Attribute")

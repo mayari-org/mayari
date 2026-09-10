@@ -2,8 +2,14 @@
   "luau-lsp.sourcemap.enabled": false,
   "luau-lsp.fflags.enableNewSolver": true,
   "luau-lsp.fflags.enableByDefault": true,
+  "luau-lsp.plugins.enabled": true,
+  "luau-lsp.plugins.fileSystem.enabled": true,
+  "luau-lsp.plugins.paths": [
+    "./.vscode/plugins/package-resolver.luau"
+  ],
   "luau-lsp.types.definitionFiles": {
-    "zune": "~/.zune/typedefs/global/zune.d.luau"
+    "zune": "~/.zune/typedefs/global/zune.d.luau",
+    "mayari": "packages/luau/.ember/mayari_types/mayari.d.luau"
   },
   "luau-lsp.types.documentationFiles": [
     "~/.zune/typedefs/global/zune.d.json"

@@ -1,7 +1,5 @@
-local common = require("@mayari.common")
-
 type Attributes = {
-    [string]: ({ any }) -> (common.Request, common.Next) -> common.ResponsePayload?,
+    [string]: ({ any }) -> (IRequest, INext) -> IResponsePayload?,
 }
 
 --[[

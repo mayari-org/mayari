@@ -1,8 +1,9 @@
 local registry = require("./RegistryGenerator").registry
-local common = require("@mayari.common")
+local common = require("common")
+
 local Response = common.response
 
-local function validateBody(schema: { [string]: common.BodyField }, data: { [string]: any }): { string }
+local function validateBody(schema: { [string]: IBodyField }, data: { [string]: any }): { string }
     local errors = {}
 
     for field, rules in schema do
@@ -48,7 +49,7 @@ local function validateBody(schema: { [string]: common.BodyField }, data: { [str
     return errors
 end
 
-local function validateString(schema: { [string]: common.StringField }, data: { [string]: any }): { string }
+local function validateString(schema: { [string]: IStringField }, data: { [string]: any }): { string }
     local errors = {}
 
     for field, rules in schema do
@@ -82,7 +83,7 @@ local function validateString(schema: { [string]: common.StringField }, data: { 
 end
 
 local function Validator(args: { string })
-    return function(req: common.Request, next: common.Next)
+    return function(req: IRequest, next: INext)
         local attribute = registry["Validator"]
 
         if not attribute then
@@ -90,7 +91,7 @@ local function Validator(args: { string })
         end
 
         for _, arg in ipairs(args) do
-            local rule = (attribute[arg] :: any) :: common.ValidatorSchema
+            local rule = (attribute[arg] :: any) :: IValidatorSchema
 
             if not rule then
                 continue
