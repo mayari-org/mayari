@@ -1,4 +1,4 @@
-local adpt = require("@mayari.adpt")
+local adpt = require("@adpt")
 local runner = require("@self/runner")
 
 local fs = adpt.fs

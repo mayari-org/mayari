@@ -4,7 +4,7 @@ runs:
   steps:
     - shell: bash
       run: |
-        curl -f -L "https://github.com/luaupm/lpm/releases/download/v0.5.2/lpm-linux-x86_64.zip" -o lpm.zip
+        curl -f -L "https://github.com/luaupm/lpm/releases/download/v0.5.4/lpm-linux-x86_64.zip" -o lpm.zip
         unzip -j lpm.zip
         chmod +x lpm
         sudo mv lpm /usr/local/bin/lpm

@@ -9,21 +9,14 @@ license = "MIT"
 [target]
 environment = "luau"
 main = "src/index.luau"
-includes = ["README.md", "LICENSE", "src", ".luaurc", "lpm.toml", "lpm.lock"]
+includes = ["README.md", "LICENSE", ".mayari/src", "lpm.toml"]
 
 [scripts]
-"dev:lute" = "lute run dev"
-"dev:lune" = "lune run dev"
-"dev:zune" = "zune run dev"
-
-"start:lute" = "lute run start"
-"start:lune" = "lune run start"
-"start:zune" = "zune run start"
-
 "test" = "lute run test && lune run test && zune run test"
 "format:check" = "stylua -c src/"
 "format:fix" = "stylua src/"
 "lint:check" = "selene src/"
+res = "zune run resolve"
 
 "postinstall" = "git config filter.sanitize-c-alias.clean \"sed -E 's/(\\\"c\\\":\\\\s*\\\")[^\\\"]+(\\\")/\\\\1\\\\/path\\\\/to\\\\/placeholder\\\\2/g'\""
 
@@ -37,3 +30,4 @@ selene = "Kampfkarren/selene@0.31.0"
 [dependencies]
 common = { name = "mayari/common", version = "^" }
 adpt = { name = "mayari/adpt", version = "^" }
+types = { name = "mayari/types", version = "^" }

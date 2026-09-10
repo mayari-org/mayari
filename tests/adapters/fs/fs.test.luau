@@ -1,5 +1,5 @@
 local runner = require("@test-runner")
-local adpt = require("@mayari.adpt")
+local adpt = require("@adpt")
 
 local fs = adpt.fs
 

@@ -1,4 +1,4 @@
-local adpt = require("@mayari.adpt")
+local adpt = require("adpt")
 local json = adpt.json
 
 type BodyParsers = { [string]: (raw: string) -> string | { any } }

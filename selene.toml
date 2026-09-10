@@ -1,2 +1,2 @@
-std = "zunes"
+std = "luau"
 exclude = ["luau_packages/**", "lune_packages/**"]

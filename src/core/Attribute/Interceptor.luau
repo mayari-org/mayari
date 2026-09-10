@@ -1,8 +1,7 @@
 local registry = require("./RegistryGenerator").registry
-local common = require("@mayari.common")
 
 local function Interceptor(args: { string })
-    return function(req: common.Request, next: common.Next)
+    return function(req: IRequest, next: INext)
         local attribute = registry["Interceptor"]
 
         if not attribute then
@@ -21,7 +20,7 @@ local function Interceptor(args: { string })
             return next()
         end
 
-        local function buildChain(index: number): common.Next
+        local function buildChain(index: number): INext
             if index > #rules then
                 return next
             end

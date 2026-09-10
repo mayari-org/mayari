@@ -1,7 +1,8 @@
-local common = require("@mayari.common")
+local common = require("common")
 local RouteHelper = require("./Helpers")
 local BodyParser = require("../BodyParser")
 local RouteMatcher = require("./Matcher")
+
 local Exception = common.exception
 
 local METHOD_MAP = RouteHelper.METHOD_MAP
@@ -12,7 +13,9 @@ local routeTreeRoot = RouteHelper.routeTreeRoot
 local splitPath = RouteHelper.splitPath
 local matchRoute = RouteMatcher.matchRoute
 
-local function routerDispatcher(req: common.Request)
+type RequestWithParams = IRequest<{ params: { [string]: any } }>
+
+local function routerDispatcher(req: RequestWithParams)
     if #req.path > 1 and string.byte(req.path, -1) == 47 then
         req.path = string.sub(req.path, 1, -2)
     end
@@ -37,7 +40,6 @@ local function routerDispatcher(req: common.Request)
 
         if not matchedNode or not matchedNode.module then
             error(Exception.NotFound())
-            -- return json({ error = "Not Found" }, { status = 404 })
         end
 
         matchedModule = matchedNode.module
@@ -48,10 +50,9 @@ local function routerDispatcher(req: common.Request)
 
     if typeof(handler) ~= "function" then
         error(Exception.HttpException(405, "Method Not Allowed"))
-        -- return json({ error = "Method Not Allowed" }, { status = 405 })
     end
 
-    local fn = handler :: (common.Request) -> any
+    local fn = handler :: (RequestWithParams) -> any
     return fn(req)
 end
 
