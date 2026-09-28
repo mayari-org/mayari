@@ -1,6 +1,6 @@
+require("./utils/LoadEnv")()
 local routeDispatcher = require("./core/Routing/Dispatcher")
 local generateRoute = require("./core/Routing/Generator")
-local loadEnv = require("./utils/LoadEnv")
 local MainDir = require("./utils/MainDir")
 local alias = require("./utils/Alias")
 local attrRegistryGenerator = require("./core/Attribute/RegistryGenerator")
@@ -9,13 +9,10 @@ local Chain = require("./utils/Chain")
 local adpt = require("adpt")
 
 local net = adpt.net
-local fs = adpt.fs
 local json = adpt.json
 local process = adpt.process
 
 local serve = net.serve
-local isFile = fs.isFile
-local readFile = fs.readFile
 local cwd = process.cwd
 
 local Mayari = {}
@@ -51,7 +48,6 @@ function Mayari.new(port: number, middlewares: { any }?)
     self.middlewares = middlewares
     self.dev = table.find(process.args, "dev") ~= nil
 
-    loadEnv()
     alias.set("c", cwd)
 
     return self :: IMayari
@@ -63,21 +59,7 @@ function Mayari.listen(self: MayariPrivate, handler: () -> ())
     local mainDirName = MainDir
     local mainDir = `@c/{mainDirName}`
 
-    local faviconPath = `{cwd}/{mainDirName}/favicon.ico`
     local isDev = self.dev
-
-    local FAVICON_CACHED_RESPONSE: any = nil
-
-    if isFile(faviconPath) then
-        FAVICON_CACHED_RESPONSE = {
-            status = 200,
-            body = readFile(faviconPath),
-            headers = {
-                ["Content-Type"] = "image/x-icon",
-                ["Cache-Control"] = "public, max-age=86400",
-            },
-        }
-    end
 
     RouteLogger.setMiddlewares(self.middlewares or {})
 
@@ -97,20 +79,6 @@ function Mayari.listen(self: MayariPrivate, handler: () -> ())
     serve(self.port, {
         address = "0.0.0.0",
         handleRequest = function(request)
-            if request.path == "/favicon.ico" and request.method == "GET" then
-                if isDev and isFile(faviconPath) then
-                    return {
-                        status = 200,
-                        body = readFile(faviconPath),
-                        headers = {
-                            ["Content-Type"] = "image/x-icon",
-                            ["Cache-Control"] = "no-cache",
-                        },
-                    }
-                end
-                return FAVICON_CACHED_RESPONSE or { status = 204 }
-            end
-
             local success, result: IResponsePayload | { statusCode: number, message: string } | any =
                 pcall(rootPipeline, request)
 
