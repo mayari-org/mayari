@@ -53,7 +53,7 @@ local function chain(middlewares: { IMiddleware }, finalHandler: IHandler)
             query = rawReq.query or {},
             headers = rawReq.headers or {},
             body = rawReq.body,
-            params = {},
+            params = rawReq.params or {},
         }
 
         return currentPipeline(req)
