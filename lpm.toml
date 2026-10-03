@@ -18,12 +18,10 @@ includes = ["README.md", "LICENSE", ".mayari/src", "lpm.toml"]
 "lint:check" = "selene src/"
 res = "zune run resolve"
 
-"postinstall" = "git config filter.sanitize-c-alias.clean \"sed -E 's/(\\\"c\\\":\\\\s*\\\")[^\\\"]+(\\\")/\\\\1\\\\/path\\\\/to\\\\/placeholder\\\\2/g'\""
-
 [tools]
-lute = "luau-lang/lute@1.0.0"
+lute = "luau-lang/lute@1.0.1-nightly.20260923"
 lune = "lune-org/lune@0.10.5"
-zune = "Scythe-Technology/zune@0.5.6"
+zune = "Scythe-Technology/zune@0.5.8"
 stylua = "JohnnyMorganz/StyLua@2.5.2"
 selene = "Kampfkarren/selene@0.31.0"
 
