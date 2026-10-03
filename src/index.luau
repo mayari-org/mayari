@@ -13,7 +13,6 @@ local json = adpt.json
 local process = adpt.process
 
 local serve = net.serve
-local cwd = process.cwd
 
 local Mayari = {}
 Mayari.__index = Mayari
@@ -48,7 +47,7 @@ function Mayari.new(port: number, middlewares: { any }?)
     self.middlewares = middlewares
     self.dev = table.find(process.args, "dev") ~= nil
 
-    alias.set("c", cwd)
+    alias.set("c", "./")
 
     return self :: IMayari
 end
