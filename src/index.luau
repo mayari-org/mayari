@@ -41,7 +41,7 @@ local function devMiddleware(req: IRequest, next: INext)
     statusLog(status, req)
 end
 
-function Mayari.new(port: number, middlewares: { any }?)
+function Mayari.new(port: number | string, middlewares: { any }?)
     local self = setmetatable({} :: MayariPrivate, Mayari)
     self.port = port
     self.middlewares = middlewares
@@ -75,7 +75,7 @@ function Mayari.listen(self: MayariPrivate, handler: () -> ())
 
     local rootPipeline = Chain(allMiddlewares :: { IMiddleware }, routeDispatcher)
 
-    serve(self.port, {
+    serve(tonumber(self.port) :: number, {
         address = "0.0.0.0",
         handleRequest = function(request)
             local success, result: IResponsePayload | { statusCode: number, message: string } | any =

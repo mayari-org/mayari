@@ -19,7 +19,7 @@ local DECORATOR_DIRS = {
 ]]
 local function loadRegistry(mainDir: string)
     for _, dirName in DECORATOR_DIRS do
-        local resolvedPath = mainDir:gsub("@c/", cwd .. "/") .. "/../" .. dirName
+        local resolvedPath = mainDir:gsub("@c/", cwd .. "/") .. "/../common/" .. dirName
 
         if not fs.isDir(resolvedPath) then
             continue
@@ -33,7 +33,7 @@ local function loadRegistry(mainDir: string)
             local name = item:match("^(.+)%.luau$")
 
             if name then
-                local modulePath = mainDir .. "/../" .. dirName .. "/" .. name
+                local modulePath = mainDir .. "/../common/" .. dirName .. "/" .. name
                 local ok, result = pcall(require, modulePath)
 
                 if ok and type(result) == "function" or type(result) == "table" then
